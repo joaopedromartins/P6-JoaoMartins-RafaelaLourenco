@@ -52,6 +52,10 @@
 							<groupId>pt.uc.dei.aor.paj</groupId>
 							<artifactId>p6-playlist-web</artifactId>
 						</webModule>
+						<webModule>
+							<groupId>pt.uc.dei.aor.paj</groupId>
+							<artifactId>p6-playlist-ws</artifactId>
+						</webModule>
 						<ejbModule>
 							<groupId>pt.uc.dei.aor.paj</groupId>
 							<artifactId>p6-playlist-ejb</artifactId>

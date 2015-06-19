@@ -10,6 +10,8 @@
 	<artifactId>p6-playlist-ws</artifactId>
 	<packaging>war</packaging>
 
+	<name>p6-playlist-ws</name>
+	
 	<build>
 		<finalName>${project.artifactId}</finalName>
 	</build>
@@ -21,10 +23,12 @@
 			<version>0.0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
+		
 		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
 		</dependency>
+		
 		<!-- Primefaces -->
 		<dependency>
 			<groupId>org.primefaces</groupId>
