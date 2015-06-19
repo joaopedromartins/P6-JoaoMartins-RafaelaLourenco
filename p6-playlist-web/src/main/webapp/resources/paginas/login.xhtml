@@ -1,0 +1,68 @@
+<ui:composition template="../paginas/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+ 	<link rel="stylesheet" type="text/css" href="../css/template.css" /> 
+	
+	<ui:define name="conteudo">
+			<center>
+				<h:outputText styleClass="txtconteudo"
+					value="Faça login para entrar no nosso site." />
+				<BR />
+				<h:outputText styleClass="txtconteudo"
+					value="Se é a primeira vez que nos visita, faça o seu registo em baixo." />
+				<BR />
+
+				<div id="container" class="ui-grid ui-grid-responsive">
+					<div class="ui-grid-row ">
+						<div class="ui-grid-col-2" />
+						<div class="ui-grid-col-8">
+							<p:panel id="login" header="Login de Utilizador">
+								
+								<br />
+								<img src="../imagens/login.png" />
+
+								<h:form>
+								<h:panelGrid columns="3" cellpadding="10">
+								
+									<h:outputText value="Username:" />
+									<h:inputText id="username" title="username"
+										value="#{usersinterface.username}" required="true"
+										requiredMessage="Preencha o seu nome" maxlength="25" />
+									<h:message for="username" errorClass="errorMessage" />
+									<h:outputText value="Password:" />
+									<h:inputSecret id="password" title="password"
+										value="#{usersinterface.password}" required="true"
+										requiredMessage="Preencha aqui a password pretendida"
+										maxlength="25" />
+									<h:message for="password" errorClass="errorMessage" />
+								</h:panelGrid>
+								<br />
+								<h:commandButton type="submit" value="Login"
+									styleClass="btn" action="#{usersinterface.userlogin}" />
+								</h:form>
+								<br />
+								<br />
+								<br />
+
+								<h:outputText
+									value="Se ainda não tiver uma conta, carregue no botão em baixo para ir para a página de Registo." />
+								<br />
+								<br />
+								<h:form>
+								<h:commandButton type="submit" value="Registo" styleClass="btn"
+									action="signup" />
+								<br />
+								</h:form>
+							</p:panel>
+						</div>
+						<div class="ui-grid-col-2" />
+					</div>
+				</div>
+			</center>
+		
+
+	</ui:define>
+</ui:composition>

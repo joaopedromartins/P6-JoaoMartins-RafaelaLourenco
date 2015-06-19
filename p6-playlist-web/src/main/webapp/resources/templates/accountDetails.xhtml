@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<h:outputStylesheet library="css" name="musicList.css" />
+</h:head>
+
+
+<h:body>
+	<ui:composition>
+	
+		<h:panelGroup id="accountDetails" styleClass="accountSection ui-grid-col-11">
+			<h2>Detalhes da conta</h2>
+				<h:form>
+				
+					<div class="accountDetailsMain">
+					<span class="accountLabel">Username: </span>
+					<h:panelGroup class="accountValue" id="usernameValue">#{userSession.username}</h:panelGroup>
+					<span class="accountEdit"><a href="" id="usernameEditor">edit</a></span>
+					</div>
+					<div class="accountDetailsForm" id="usernameDetailsForm">
+						
+							<span class="accountUpdateFields">
+							<p:inputText value="#{usersinterface.username}" placeholder="username" 
+							validator="usernameValidator" styleClass="accountUpdateFields" required="true" 
+							requiredMessage="Username is required" id="usernameUpdater" />
+							</span>
+							<span class="accountUpdateFields">
+							<p:password value="#{usersinterface.password}" required="true" 
+							requiredMessage="Password is required" placeholder="password" styleClass="accountUpdateFields" />
+							</span>
+							<span class="accountUpdateFields">
+							<f:ajax render="usernameValue j_idt10:accountUsername :growl" execute="@form">
+							<h:commandButton action="#{usersinterface.updateUsername()}" styleClass="accountUpdateFields" value="submit" />												
+							</f:ajax>
+							</span>
+						
+					</div>
+				</h:form>
+				
+				<div>
+						<h:form>
+					<div class="accountDetailsMain">
+					<span class="accountLabel">Email: </span>
+					<h:panelGroup class="accountValue" id="accountEmail">#{userSession.email}</h:panelGroup>
+					<span class="accountEdit"><a href="" id="emailEditor">edit</a></span>
+					</div>
+					<div class="accountDetailsForm" id="emailDetailsForm">
+							<span class="accountUpdateFields">
+								<p:inputText value="#{usersinterface.email}" placeholder="email" styleClass="accountUpdateFields" validator="emailValidator" />
+							</span>
+							<span class="accountUpdateFields">
+								<p:password value="#{usersinterface.password}" placeholder="password" styleClass="accountUpdateFields" />
+							</span>
+							<span class="accountUpdateFields">
+							<f:ajax render="accountEmail :growl" execute="@form">
+							<h:commandButton action="#{usersinterface.updateEmail()}" styleClass="accountUpdateFields" value="submit" update="growl" />
+							</f:ajax>
+							</span>
+					</div>
+						</h:form>
+				</div>
+				
+				<div>
+						<h:form>
+					<div class="accountDetailsMain">
+					<span class="accountLabel">Password: </span>
+					<span class="accountValue">****</span>
+					<span class="accountEdit"><a href="" id="passwordEditor">edit</a></span>
+					</div>
+					<div class="accountDetailsForm" id="passwordDetailsForm">
+							<span class="accountUpdateFields">
+							<p:password value="#{usersinterface.password}" placeholder="new password" validator="passwordValidator">
+								<f:attribute name="confirm" value="#{confirm}" />
+							</p:password>
+							</span>
+							<span class="accountUpdateFields">
+							<p:password value="#{usersinterface.cpassword}" binding="#{confirm}" styleClass="accountUpdateFields" placeholder="confirm password" />
+							</span>
+							<span class="accountUpdateFields">
+							<p:password value="#{usersinterface.oldPassword}" styleClass="accountUpdateFields" placeholder="old password" />
+							</span>
+							<span class="accountUpdateFields">
+							<f:ajax execute="@form" render=":growl">
+							<h:commandButton action="#{usersinterface.updatePassword()}" styleClass="accountUpdateFields" value="submit" update="growl" />
+							</f:ajax>
+							</span>
+					</div>
+						</h:form>
+				</div>
+				
+				<div>
+				<h:form prependId="false">
+					<div class="accountDetailsMain"><a href="" id="closeAccountEditor">Apagar conta</a></div>
+					<div class="accountDetailsForm" id="closeAccountForm">
+					<span class="accountUpdateFields"><p:password placeholder="password" value="#{usersinterface.password}" /></span>
+					<span class="accountUpdateFields"><h:commandButton id="closeAccountBtn" value="Close account" action="#{usersinterface.delete()}" /></span>
+					</div>
+				</h:form>
+				</div>
+			</h:panelGroup>
+
+	</ui:composition>
+</h:body>
+
+</html>

@@ -1,0 +1,215 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	
+	<h:outputStylesheet library="css" name="template.css" />
+</h:head>
+
+
+<h:body>
+	<ui:composition>
+		<h:panelGroup id="playlistDetails"
+			styleClass="accountSection">
+			
+			<h:form>
+				<h:outputText styleClass="txtconteudo"
+				value="Nesta pagina podes criar, editar e apagar as tuas playlists." />
+			<BR />
+			<h:outputText styleClass="txtconteudo"
+				value="#{userSession.username}, seleciona nos botões em baixo a operação pretendida." />
+			<BR />
+				<h:selectOneRadio id="radioplaylistop" styleClass="txtconteudo"
+					value="#{playlistinterface.operacao}">
+					<f:selectItem itemValue="criar" itemLabel="Criar" />
+					<f:selectItem itemValue="editar" itemLabel="Editar" />
+					<f:ajax event="change" execute="radioplaylistop"
+						render="@form playlistCreationFormContainer listaplaylist :listPlaylistForm :playlistCreationForm
+						playlistEditionFormContainer :editForm :deleteForm musicaselecionada 
+						listamusicasplaylist userMusicFilterAll userMusicListContainerAll" />
+				</h:selectOneRadio>
+				
+			</h:form>
+			<br />
+			<h:panelGroup id="playlistCreationFormContainer">
+				<h:form id="playlistCreationForm"
+					rendered="#{playlistinterface.operacao eq 'criar'}">
+					<h:outputText
+						value="#{userSession.username}, prencha os campos em baixo para criar uma playlist."
+						styleClass="txtconteudo" />
+					<br />
+					<h:outputText value="Nome playlist:" />
+					<h:inputText id="playlistname" title="Nome playlist"
+						value="#{playlistinterface.playlistname}" required="true"
+						requiredMessage="Preencha o nome da playlist" maxlength="32" />
+					<f:ajax execute="@form" render="@form :growl :deleteForm :editForm :listPlaylistForm">
+					<h:commandButton type="submit" value="criar" styleClass="btn" update="growl"
+						action="#{playlistinterface.criaplaylist()}" />
+					</f:ajax>
+					
+				</h:form>
+				
+			</h:panelGroup>
+			
+			<h:panelGroup id="playlistEditionFormContainer">
+
+				<h:form id="deleteForm" style="display:inline-block"
+					rendered="#{playlistinterface.typeeditar() and !empty playlistinterface.playlistname}">
+					<h1>#{playlistinterface.playlistname}</h1>
+					<f:ajax execute="@form" render="@form :growl listaplaylist :listPlaylistForm
+					:playlistCreationForm :editForm playlistEditionFormContainer listamusicasplaylist
+					musicaselecionada listamusicasplaylist userMusicFilterAll userMusicListContainerAll">
+					<h:commandButton type="submit" value="eliminar playlist" styleClass="btn"
+						action="#{playlistinterface.apagaplaylist()}" update="growl" />
+					</f:ajax>
+				</h:form>
+				<h:form id="editForm" style="margin-left:30px display:inline-block"
+					rendered="#{playlistinterface.typeeditar() and !empty playlistinterface.playlistname}">
+					<p:inputText id="renameplaylist" title="Nome playlist"
+						placeholder="novo nome playlist"
+						value="#{playlistinterface.playlistnewname}" required="true"
+						requiredMessage="Preencha o nome da playlist" maxlength="32" />
+					<f:ajax execute="@form" render="@form :growl listaplaylist :listPlaylistForm
+					:playlistCreationForm :deleteForm">
+						<h:commandButton type="submit" value="actualizar" styleClass="btn"
+							action="#{playlistinterface.renameplaylist()}" update="growl" />
+					</f:ajax>
+				</h:form>
+			</h:panelGroup>
+
+			
+			<h:panelGroup id="listaplaylist" >
+				<h:form id="listPlaylistForm" rendered="#{playlistinterface.typeeditar()}">
+				<h:outputText value="1. Selecione a" />
+				<br />
+				<h:outputText value="Playlist" />
+				<br />
+				<h:panelGrid columns="1" styleClass="painel-interior">
+						<h:dataTable value="#{playlistinterface.listaplaylistnames}"
+							var="item">
+							<h:column>
+								<h:commandLink styleClass="btnJ"
+									actionListener="#{playlistinterface.selectplaylist}"
+									value="#{item}">
+									<f:attribute name="selectedline" value="#{item}" />
+									<f:ajax render="listaplaylist playlistEditionFormContainer :playlistCreationForm
+									:editForm :deleteForm listamusicasplaylist :playlistMusicForm musicaselecionada
+									userMusicFilterAll :userMusicListAll :userMusicFilterForm" />
+								</h:commandLink>
+							</h:column>
+						</h:dataTable>
+					</h:panelGrid>
+				
+
+				<h:selectOneMenu value="#{playlistinterface.searchType}">
+					<f:selectItem itemLabel="Nome/Designação" itemValue="title" />
+					<f:selectItem itemLabel="Data de criação" itemValue="date" />
+					<f:selectItem itemLabel="Tamanho" itemValue="tamanho" />
+				</h:selectOneMenu>
+
+				<h:selectOneMenu value="#{playlistinterface.searchOrder}">
+					<f:selectItem itemLabel="&#8593;" itemValue="asc" />
+					<f:selectItem itemLabel="&#8595;" itemValue="desc" />
+					<f:ajax render="@form" execute="@form" />
+				</h:selectOneMenu>
+			</h:form>
+			</h:panelGroup>
+
+
+			<h:panelGroup prependId="false" id="listamusicasplaylist">
+				<h:form id="playlistMusicForm" rendered="#{playlistinterface.typeeditar() and !empty playlistinterface.playlistname}">
+				<h:outputText value="2. Seleccione a Musica" />
+				<br />
+				<h:outputText value="da Playlist" />
+				<br />
+					<h:panelGrid prependId="false" columns="1"
+						styleClass="painel-interior">
+						<h:dataTable value="#{playlistinterface.listaplaylistmusics}"
+							var="musicentry" varStatus="status">
+							<h:column>
+								<h:commandLink styleClass="btnJ"
+									actionListener="#{playlistinterface.selectmusic}"
+									value="#{musicentry.title}">
+									<f:attribute name="selectedmusicline" value="#{musicentry.id}" />
+									<f:ajax render="@form playlistCreationFormContainer listaplaylist :listPlaylistForm 
+									:playlistCreationForm playlistEditionFormContainer :editForm 
+									:deleteForm musicaselecionada :thirdScreenForm" />
+								</h:commandLink>
+							</h:column>
+							<h:column>
+								<h:commandLink value="#{musicentry.author}" disabled="true" />
+							</h:column>
+							<h:column>
+								<span> <h:outputLink styleClass="playBtn"
+										id="btnPlaylist#{status.index}" value="">play</h:outputLink> <h:inputHidden
+										id="hiddenPlaylist#{status.index}"
+										value="#{musicentry.filename}" />
+								</span>
+							</h:column>
+						</h:dataTable>
+					</h:panelGrid>
+				</h:form>
+			</h:panelGroup>
+
+
+			<h:panelGroup id="musicaselecionada">
+			<h:form id="thirdScreenForm" rendered="#{playlistinterface.typeeditar() and !empty playlistinterface.playlistname}">
+				<h:outputText value="3. Adicionar/Remover a Musica" />
+				<br />
+				<h:outputText value="da Playlist" />
+				<br />
+				<br />
+				<h:outputText value="Titulo: " />
+				<h:outputText value="#{playlistinterface.selectedmusic.title}" />
+				<br />
+				<h:outputText value="Autor: " />
+				<h:outputText value="#{playlistinterface.selectedmusic.author}" />
+				<br />
+				<h:outputText value="Album: " />
+				<h:outputText value="#{playlistinterface.selectedmusic.album}" />
+				<br />
+				<h:outputText value="Genero: " />
+				<h:outputText value="#{playlistinterface.selectedmusic.genre}" />
+				<br />
+				<h:outputText value="Duração: " />
+				<h:outputText value="#{playlistinterface.selectedmusic.duration}" />
+				<br />
+				<h:outputText value="Ano de lançamento: " />
+				<h:outputText value="#{playlistinterface.selectedmusic.year}" />
+				<br />
+				<h:panelGrid rendered="#{playlistinterface.newMusic}">
+						<f:ajax render="@form :playlistMusicForm :growl">
+					<h:commandButton value="Adicionar" styleClass="btn"
+						action="#{playlistinterface.addMusicToPlaylist}" update="growl" />
+					</f:ajax>
+				</h:panelGrid>
+						<f:ajax render="@form :playlistMusicForm">
+				<h:panelGrid columns="2" styleClass="painel-interior"
+					rendered="#{!playlistinterface.newMusic}">
+					<h:commandButton type="submit" value="Remover" styleClass="btn"
+						action="#{playlistinterface.delmusicfromplaylist}" />
+					<h:panelGrid columns="1" styleClass="painel-interior">
+						<h:commandButton type="submit" value="Mover para cima"
+							styleClass="btn"
+							action="#{playlistinterface.moveupmusicfromplaylist}" />
+						<h:commandButton type="submit" value="Mover para baixo"
+							styleClass="btn"
+							action="#{playlistinterface.movedownmusicfromplaylist}" />
+					</h:panelGrid>
+				</h:panelGrid>
+						</f:ajax>
+				</h:form>
+			</h:panelGroup>
+			
+		</h:panelGroup>
+
+
+	</ui:composition>
+</h:body>
+
+</html>

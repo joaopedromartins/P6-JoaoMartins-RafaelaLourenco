@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<h:outputStylesheet library="css" name="musicList.css" />
+</h:head>
+
+
+<h:body>
+	<ui:composition>
+		<h:form>
+			<h:selectOneMenu value="#{musicList.searchType}">
+				<f:selectItem itemLabel="All Musics" itemValue="all" />
+				<f:selectItem itemLabel="Title" itemValue="title" />
+				<f:selectItem itemLabel="Artist" itemValue="artist" />
+			</h:selectOneMenu>
+			<h:inputText value="#{musicList.searchField}" />
+			<h:commandButton action="#{musicList.searchMusic}" value="Search" />
+		</h:form>
+		
+		<h:panelGroup>
+			<ui:repeat var="music" value="#{musicList.filteredMusicList}">
+				#{music}
+			</ui:repeat>
+		</h:panelGroup>
+
+	</ui:composition>
+</h:body>
+
+</html>

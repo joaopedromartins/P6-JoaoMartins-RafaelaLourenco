@@ -1,0 +1,177 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<h:outputStylesheet library="css" name="musicList.css" />
+</h:head>
+
+
+<h:body>
+	<ui:composition>
+		<div id="userMusicFilter" class="accountSection ui-grid-col-11">
+			<h2>Uploads</h2>
+			<a href="" id="newMusicBtn">adicionar música</a>
+
+			<div id="musicUploaderFormContainer">
+				<h3>Adicionar nova música</h3>
+				<h:form id="musicUploaderForm" enctype="multipart/form-data">
+					<div class="uploadFormInput">
+						<p:inputText value="#{uploader.title}" placeholder="título" required="true" 
+						requiredMessage="Music title is required" validator="titleValidator">
+							<f:attribute name="artist" value="#{artist}" />
+							<f:attribute name="album" value="#{album}" />
+						</p:inputText>
+					</div>
+					<div class="uploadFormInput">
+						<p:inputText value="#{uploader.author}" placeholder="artista" required="true"
+						requiredMessage="Music artist is required" binding="#{artist}" />
+					</div>
+					<div class="uploadFormInput">
+						<p:inputText value="#{uploader.album}" placeholder="album" binding="#{album}" />
+					</div>
+					<div class="uploadFormInput">
+						<p:inputText value="#{uploader.genre}" placeholder="género" />
+					</div>
+					<div class="uploadFormInput">
+						<p:inputText value="#{uploader.year}" placeholder="ano" validator="yearValidator" />
+					</div>
+					<div class="uploadFormInput">
+						<h:inputFile id="fileInput" value="#{uploader.file}" required="true"
+						requiredMessage="Filename is required" validator="fileValidator" />
+					</div>
+
+					<div class="uploadFormInput">
+						<f:ajax execute="@form" render=":userMusicList :userMusicListContainer :growl">
+							<h:commandButton value="Upload" action="#{uploader.upload}" />
+						</f:ajax>
+
+					</div>
+				</h:form>
+			</div>
+
+			<h:form>
+				<span class="accountUpdateFields"> <h:selectOneMenu
+						id="filterField" value="#{musicFilters.filter}">
+						<f:selectItems value="#{musicFilters.filters}" />
+					</h:selectOneMenu>
+				</span>
+				<span class="accountUpdateFields"> <p:inputText
+						value="#{musicFilters.field}" id="filterKeyword"
+						placeholder="filter keyword" />
+				</span>
+				<span class="accountUpdateFields"> <f:ajax
+						render="@form userMusicList" execute="filterKeyword filterField">
+						<h:commandButton action="#{musicFilters.addFilter()}"
+							value="Filtrar" />
+					</f:ajax>
+
+				</span>
+				<span id="filterList"> <ui:repeat var="filter"
+						value="#{musicFilters.activeFilters}" varStatus="status">
+						<span class="filterUnit"> <span class="filterText">#{filter}</span>
+							<span class="filterRemoval"> <sup> <f:ajax
+										render="@form :userMusicList :userMusicListContainer">
+										<h:commandLink style="color:red;text-decoration:none;"
+											value="x" action="#{musicFilters.removeFilter(status.index)}" />
+									</f:ajax>
+							</sup>
+						</span>
+						</span>
+					</ui:repeat>
+				</span>
+			</h:form>
+
+			<h:panelGroup id="userMusicListContainer">
+				<h:form id="userMusicList">
+					<h:panelGroup rendered="#{empty musicFilters.listMusics}">
+					Sem resultados
+				</h:panelGroup>
+					<h:panelGroup rendered="#{not empty musicFilters.listMusics}">
+						<div class="userMusicHeader">
+							<span class="userMusicCellLarge userMusicCell">Título</span> <span
+								class="userMusicCellLarge userMusicCell">Artista</span> <span
+								class="userMusicCellLarge userMusicCell">Album</span> <span
+								class="userMusicCell userMusicCellSmall">Ano</span> <span
+								class="userMusicCell userMusicCellSmall">Género</span> <span
+								class="userMusicCell userMusicCellSmall">Duração</span>
+						</div>
+
+						<ui:repeat value="#{musicFilters.listMusics}" var="music"
+							varStatus="status">
+							<div class="userMusicRow">
+								<span class="userMusicCellLarge userMusicCell">#{music.title}</span>
+								<span class="userMusicCellLarge userMusicCell">#{music.author}</span>
+								<span class="userMusicCellLarge userMusicCell">#{music.album}</span>
+								<span class="userMusicCell userMusicCellSmall">#{music.year}</span>
+								<span class="userMusicCell userMusicCellSmall">#{music.genre}</span>
+								<span class="userMusicCell userMusicCellSmall">#{music.duration}</span>
+								<span class="userMusicCell userMusicCellLink"> <h:outputLink
+										styleClass="playBtn" id="btn#{status.index}" value="">play</h:outputLink>
+									<h:inputHidden id="hidden#{status.index}"
+										value="#{music.filename}" />
+								</span> <span class="userMusicCell userMusicCellLink"> <f:ajax
+										render="@form">
+										<h:commandLink id="editMusicBtn#{status.index}"
+											styleClass="editMusicBtn"
+											action="#{musicFilters.changeEditor(status.index, music)}"
+											value="edit" />
+									</f:ajax>
+								</span> <span class="userMusicCell userMusicCellLink"> <f:ajax
+										render="@form :growl">
+										<h:commandLink value="remover"
+											action="#{uploader.remove(music.id)}" />
+									</f:ajax>
+								</span>
+							</div>
+							<h:panelGroup styleClass="userMusicRow userMusicRowEditor" id="updater"
+								rendered="#{status.index==musicFilters.editorChoice}">
+							
+									<span class="uploadFormInput"> <p:inputText
+											value="#{uploader.title}" placeholder="título" required="true"
+							requiredMessage="Music title is required" validator="titleValidator">
+													<f:attribute name="artist" value="#{artist2}" />
+													<f:attribute name="album" value="#{album2}" />
+													<f:attribute name="prvTitle" value="#{music.title}" />
+													<f:attribute name="prvArtist" value="#{music.author}" />
+													<f:attribute name="prvAlbum" value="#{music.album}" />
+													
+											</p:inputText>
+									</span>
+									<span class="accountUpdateFields"> <p:inputText
+											value="#{uploader.author}" placeholder="artista" required="true"
+									requiredMessage="Music artist is required" binding="#{artist2}" />
+									</span>
+									<span class="accountUpdateFields"> <p:inputText
+											value="#{uploader.album}" placeholder="album" binding="#{album2}"/>
+									</span>
+									<span class="accountUpdateFields"> <p:inputText
+											value="#{uploader.genre}" placeholder="género" />
+									</span>
+									<span class="accountUpdateFields"> <p:inputText
+											value="#{uploader.year}" placeholder="ano" validator="yearValidator"/>
+									</span>
+									<span class="accountUpdateFields"> 
+									<f:ajax execute="updater" render="userMusicList :growl">
+									<h:commandButton
+											action="#{uploader.update(music.id)}" value="update" />
+											</f:ajax>
+									</span>
+								
+							</h:panelGroup>
+
+						</ui:repeat>
+					</h:panelGroup>
+				</h:form>
+			</h:panelGroup>
+		</div>
+
+
+	</ui:composition>
+</h:body>
+
+</html>

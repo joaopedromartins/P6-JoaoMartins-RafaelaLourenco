@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<h:outputStylesheet library="css" name="musicList.css" />
+</h:head>
+
+
+<h:body>
+	<ui:composition>
+		<h:panelGroup id="userMusicFilterAll" >
+			
+
+			<h:form id="userMusicFilterForm" rendered="#{playlistinterface.typeeditar() and !empty playlistinterface.playlistname}">
+				<span class="accountUpdateFields"> <h:selectOneMenu
+						id="filterFieldAll" value="#{appMusicFilters.filter}">
+						<f:selectItems value="#{appMusicFilters.filters}" />
+					</h:selectOneMenu>
+				</span>
+				<span class="accountUpdateFields"> <p:inputText
+						value="#{appMusicFilters.field}" id="filterKeywordAll"
+						placeholder="filter keyword" />
+				</span>
+				<span class="accountUpdateFields"> <f:ajax
+						render="@form userMusicListAll" execute="filterKeywordAll filterFieldAll">
+						<h:commandButton action="#{appMusicFilters.addFilter()}"
+							value="Filtrar" />
+					</f:ajax>
+
+				</span>
+				<div id="filterListAll"> <ui:repeat var="filter"
+						value="#{appMusicFilters.activeFilters}" varStatus="status">
+						<span class="filterUnit"> <span class="filterText">#{filter}</span>
+							<span class="filterRemoval"> <sup> <f:ajax
+										render="@form :userMusicListAll :userMusicListContainerAll">
+										<h:commandLink style="color:red;text-decoration:none;"
+											value="x" action="#{appMusicFilters.removeFilter(status.index)}" />
+									</f:ajax>
+							</sup>
+						</span>
+						</span>
+					</ui:repeat>
+				</div>
+			</h:form>
+
+			<h:panelGroup id="userMusicListContainerAll" rendered="#{playlistinterface.typeeditar() and !empty playlistinterface.playlistname}">
+				<h:form id="userMusicListAll">
+					<h:panelGroup rendered="#{empty appMusicFilters.listMusics}">
+					Sem resultados
+				</h:panelGroup>
+					<h:panelGroup rendered="#{not empty appMusicFilters.listMusics}">
+						<div class="userMusicHeader">
+							<span class="userMusicCellLarge userMusicCell">Música</span> 
+						</div>
+
+						<ui:repeat value="#{appMusicFilters.listMusics}" var="music"
+							varStatus="status">
+							<div class="userMusicRow">
+								<span class="userMusicCellLarge userMusicCell">#{music}</span>
+								
+								<span class="userMusicCell userMusicCellLink"> <h:outputLink
+										styleClass="playBtn" id="btn#{status.index}" value="">play</h:outputLink>
+									<h:inputHidden id="hiddenAll#{status.index}"
+										value="#{music.filename}" />
+								</span> <span class="userMusicCell userMusicCellLink"> <f:ajax
+										render="@form :musicaselecionada :thirdScreenForm">
+										<h:commandLink id="addMusicBtnAll#{status.index}"
+											styleClass="addMusicBtn"
+											action="#{playlistinterface.showMusicInfo(music)}"
+											value="detalhe" />
+									</f:ajax>
+								</span> 
+							</div>
+							
+
+						</ui:repeat>
+					</h:panelGroup>
+				</h:form>
+			</h:panelGroup>
+		</h:panelGroup>
+
+
+	</ui:composition>
+</h:body>
+
+</html>

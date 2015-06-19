@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>P4-Playlist</title>
+	<h:outputStylesheet library="css" name="index.css" />
+	<link rel="shortcut icon" href="imagens/jukebox.ico" type="image/x-icon"/>
+	<link rel="icon" href="resources/imagens/jukebox.ico" type="image/x-icon"/>
+</h:head>
+
+<h:body>
+	<div class="ui-grid ui-grid-responsive">
+		<div class="ui-grid-row  container">
+			<div class="ui-grid-col-4"></div>
+			<div class="ui-grid-col-4 formContainer">
+				<p:growl id="growl" life="5000" />  
+					
+					<h:form>
+					<h2 class="formRow">Login</h2>
+					
+					<div class="formRow">
+						<p:inputText value="#{usersinterface.username}" placeholder="email ou username"
+						required="true" maxlength="40" requiredMessage="fill in an email or username" />
+					</div>
+					<div class="formRow">
+						<p:password value="#{usersinterface.password}" placeholder="password"
+						required="true" maxlength="40" requiredMessage="fill in a password" />
+					</div>
+					<div class="formRow">
+						<p:commandButton value="login" action="#{usersinterface.userlogin()}" update="growl" />
+						ou 
+						<h:outputLink value="pages/signup.xhtml">
+								<h:outputText value="cria" />
+						</h:outputLink>
+						uma conta nova
+						
+						
+					</div>
+				</h:form>
+			</div>
+
+		</div>
+	</div>
+
+</h:body>
+</html>

@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<h:outputStylesheet library="css" name="musicList.css" />
+</h:head>
+
+
+<h:body>
+	<ui:composition>
+
+		<audio id="audioPlayer" />
+		
+
+		<ui:repeat value="#{musicList.musics}" var="item" varStatus="status">
+			<div class="musicRow" id="musicRow#{status.index}">
+				<span>#{item}</span>
+				<h:link value="play" class="playBtn" id="btn#{status.index}" />
+				<h:inputHidden id="hidden#{status.index}" value="#{musicList.path}#{item.filename}" />
+			</div>
+
+			<h:panelGroup class="musicEditRow editmusicRow#{status.index}" rendered="#{uploader.isEditable(item.id)}">
+				<h:form id="form">
+					<h:outputLabel value="title" />
+					<h:inputText value="#{uploader.title}" />
+					<h:outputLabel value="Author" />
+					<h:inputText value="#{uploader.author}" />
+					<h:outputLabel value="Album" />
+					<h:inputText value="#{uploader.album}" />
+					<h:outputLabel value="Genre" />
+					<h:inputText value="#{uploader.genre}" />
+					<h:outputLabel value="Year" />
+					<h:inputText value="#{uploader.year}" />
+
+
+					<h:commandButton value="Edit" action="#{uploader.edit(item.id)}" />
+					<h:commandButton value="Remove"
+						action="#{uploader.remove(item.id)}" />
+				</h:form>
+			</h:panelGroup>
+		</ui:repeat>
+
+	</ui:composition>
+</h:body>
+
+</html>

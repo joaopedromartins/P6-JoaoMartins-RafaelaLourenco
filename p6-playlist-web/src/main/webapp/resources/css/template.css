@@ -1,0 +1,297 @@
+@CHARSET "ISO-8859-1";
+
+html, body {
+	margin-left: auto;
+    margin-right: auto;
+	padding: 20;
+	border: 20;
+}
+
+body {
+	background-image: url("../imagens/wallpaper-madeira.png");
+	margin-left: auto;
+    margin-right: auto;
+}
+
+.txtcabecalho {
+	text-align: center;
+	color: #666666;
+	font: bold 2.0em Arial;
+}
+
+.txtrodape {
+	color: #666666;
+	font: normal 0.8em Arial;
+}
+
+.txtconteudo {
+	color: #666666;
+	font: normal 1.0em Arial;
+}
+
+.ui-widget-content {
+	background-image: url("../imagens/fundo-painel.jpg");
+}
+
+.ui-panel .ui-panel-content {
+	padding: 0px !important;
+}
+
+#container {
+	margin-top: 40px !important;
+	margin: 40px auto 0px auto;
+	align: center;
+}
+
+
+.painel-com-fundo {
+	background-image: url("../imagens/fundo-painel.jpg");
+	align: center;
+	margin: auto auto auto auto;
+}
+
+
+
+/* painel coluna1 */
+.painel-interior {
+	background-image: url("../imagens/fundo-display.png");
+	color:#777777;
+	width:100%; 
+	max-height: 200px; 
+	text-align: center;
+    font:18px Arial;
+	overflow-y: scroll; 
+}
+
+.max_height_col1 {
+	max-height: 200px;
+ 	width:97%; 
+ 	overflow-y: scroll; 
+}
+
+
+/*display chat*/
+.painel-send {
+	background-image: url("../imagens/fundo-display.png");
+	width: 100%;
+	margin-right: 10px;
+}
+
+.painel-interior-chat {
+	background-image: url("../imagens/fundo-display.png");
+	color:#777777;
+	max-width: 280px;
+	width:280px;
+	max-height: 320px;
+	height: 320px;
+    text-align: left;
+    vertical-align: button;
+    font:18px Arial;
+	overflow-y: scroll;	
+}
+
+.max_height_painel {
+	max-height: 320px;
+	height: 320px;
+	overflow-y: scroll;
+}
+
+
+/* Janela login */
+#login_table {
+	font: normal 1.2em arial;
+	align: center;
+	valign: middle;
+}
+
+
+/*display alfanumerico*/
+.txtareascientificdisplay {
+	background-image: url("../imagens/fundo-display.png");
+	color:#777777;
+	width:340px;
+    height:80px;
+    align: left;
+    valign: button;
+    font:18px Arial;
+    margin-left: 10px;
+}
+
+/* Botoes Genericos */
+.btn {
+	box-shadow: inset 0px 1px 0px 0px #ffffff;
+	background: -o-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
+	background: -ms-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
+	background: linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed',
+		endColorstr='#dfdfdf', GradientType=0);
+	background-color: #ededed;
+	border-radius: 6px;
+	border: 1px solid #dcdcdc;
+	display: inline-block;
+	cursor: pointer;
+	color: #777777;
+	font-family: Arial;
+	font-size: 20px;
+ 	font-weight: bold; 
+/* 	padding: 6px 6px; */
+	text-decoration: none;
+	text-shadow: 0px 1px 0px #ffffff;
+}
+
+.btn:hover {
+	background: -o-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+	background: -ms-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+	background: linear-gradient(to bottom, #dfdfdf 5%, #ededed 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf',
+		endColorstr='#ededed', GradientType=0);
+	background-color: #dfdfdf;
+}
+
+.btn:active {
+	position: relative;
+	top: 1px;
+}
+
+/* Botoes historico de operações */
+.btn-historico {
+	background-image: url("../imagens/fundo-display.png");
+	display: inline-block;
+	cursor: pointer;
+	color: #777777;
+	font-family: Arial;
+	min-width: 140px;
+	border: 0px;
+}
+
+/* Botoes Numericos */
+.btn-numeric {
+	box-shadow: inset 0px 1px 0px 0px #ffffff;
+	background: -o-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
+	background: -ms-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
+	background: linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed',
+		endColorstr='#dfdfdf', GradientType=0);
+	background-color: #ededed;
+	border-radius: 6px;
+	border: 1px solid #dcdcdc;
+	display: inline-block;
+	cursor: pointer;
+	color: #777777;
+	font-family: Arial;
+	font-size: 20px;
+	font-weight: bold;
+	padding: 6px 24px;
+	text-decoration: none;
+	text-shadow: 0px 1px 0px #ffffff;
+	min-width: 60px;
+	height: 50px;
+}
+
+.btn-numeric:hover {
+	background: -o-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+	background: -ms-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+	background: linear-gradient(to bottom, #dfdfdf 5%, #ededed 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf',
+		endColorstr='#ededed', GradientType=0);
+	background-color: #dfdfdf;
+}
+
+.btn-numeric:active {
+	position: relative;
+	top: 1px;
+}
+
+/* Botoes funcoes */
+.btn-fn {
+	box-shadow: inset 0px 1px 0px 0px #ffffff;
+	background: -o-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
+	background: -ms-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
+	background: linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed',
+		endColorstr='#dfdfdf', GradientType=0);
+	background-color: #ededed;
+	border-radius: 6px;
+	border: 1px solid #dcdcdc;
+	display: inline-block;
+	cursor: pointer;
+	color: #777777;
+	font:italic 14px Arial;
+	padding: 1px 1px;
+	text-decoration: none;
+	text-shadow: 0px 1px 0px #ffffff;
+	min-width: 49px;
+	height: 34px;
+}
+
+.btn-fn:hover {
+	background: -o-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+	background: -ms-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+	background: linear-gradient(to bottom, #dfdfdf 5%, #ededed 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf',
+		endColorstr='#ededed', GradientType=0);
+	background-color: #dfdfdf;
+}
+
+.btn-fn:active {
+	position: relative;
+	top: 1px;
+}
+
+/* Botao de Igual */
+.btn-equal {
+	border-top: 1px solid #d1cdcd;
+	background: #0354fc;
+	padding: 4.5px 9px;
+	border-radius: 4px;
+	box-shadow: rgba(0, 0, 0, 1) 0 1px 0;
+	text-shadow: rgba(0, 0, 0, .4) 0 1px 0;
+	color: white;
+	font-size: 36px;
+	font-family: 'Lucida Grande', Helvetica, Arial, Sans-Serif;
+	text-decoration: none;
+	vertical-align: middle;
+	min-width: 60px;
+	height: 110px;
+}
+
+.btn-equal:hover {
+	border-top-color: #0246d2;
+	background: #0354fc;
+	color: #cccccc;
+}
+
+.btn-equal:active {
+	border-top-color: #0246d2;
+	background: #0246d2;
+}
+
+
+/* botao apagar */
+.btn-clear {
+	border-top: 1px solid #d1cdcd;
+	background: #d64044;
+	padding: 4.5px 9px;
+	border-radius: 4px;
+	box-shadow: rgba(0, 0, 0, 1) 0 1px 0;
+	text-shadow: rgba(0, 0, 0, .4) 0 1px 0;
+	color: white;
+	font-size: 20px;
+	font-family: 'Lucida Grande', Helvetica, Arial, Sans-Serif;
+	text-decoration: none;
+	vertical-align: middle;
+	min-width: 60px;
+	height: 50px;
+}
+
+.btn-clear:hover {
+	border-top-color: #d22f33;
+	background: #d22f33;
+	color: #cccccc;
+}
+
+.btn-clear:active {
+	border-top-color: #d22f33;
+	background: #d22f33;
+}
+

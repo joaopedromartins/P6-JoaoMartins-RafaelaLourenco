@@ -1,0 +1,23 @@
+body {
+	background-image: url("resources/imagens/wallpaper-madeira.png");
+}
+
+.container {
+	margin-top: 10%;
+}
+
+.formRow {
+	height: 45px;
+	text-align: center;
+}
+
+label {
+	width: 100px;
+  	display: inline-block;
+  	text-align: left;
+}
+
+.formContainer {
+	border: 1px solid black;
+	background: whitesmoke;
+}

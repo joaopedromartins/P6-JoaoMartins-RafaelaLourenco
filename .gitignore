@@ -1,43 +1,39 @@
-# Windows image file caches
-Thumbs.db
-ehthumbs.db
+.settings/
+*.classpath
+*.project
+target/
+.idea/
+*.iml
+atlassian-ide-plugin.xml
 
-# Folder config file
-Desktop.ini
+P4-EAR/.settings/
+P4-EAR/*.classpath
+P4-EAR/*.project
+P4-EAR/target/
+P4-EAR/.idea/
+P4-EAR/*.iml
+P4-EAR/atlassian-ide-plugin.xml
 
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
+P4-EJB/.settings/
+P4-EJB/*.classpath
+P4-EJB/*.project
+P4-EJB/target/
+P4-EJB/.idea/
+P4-EJB/*.iml
+P4-EJB/atlassian-ide-plugin.xml
 
-# Windows Installer files
-*.cab
-*.msi
-*.msm
-*.msp
+P4-JPA/.settings/
+P4-JPA/*.classpath
+P4-JPA/*.project
+P4-JPA/target/
+P4-JPA/.idea/
+P4-JPA/*.iml
+P4-JPA/atlassian-ide-plugin.xml
 
-# Windows shortcuts
-*.lnk
-
-# =========================
-# Operating System Files
-# =========================
-
-# OSX
-# =========================
-
-.DS_Store
-.AppleDouble
-.LSOverride
-
-# Thumbnails
-._*
-
-# Files that might appear on external disk
-.Spotlight-V100
-.Trashes
-
-# Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
+P4-WEB/.settings/
+P4-WEB/*.classpath
+P4-WEB/*.project
+P4-WEB/target/
+P4-WEB/.idea/
+P4-WEB/*.iml
+P4-WEB/atlassian-ide-plugin.xml

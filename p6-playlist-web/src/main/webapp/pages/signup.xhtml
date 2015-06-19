@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>P4-Playlist</title>
+	<h:outputStylesheet library="css" name="index.css" />
+	<link rel="shortcut icon" href="../imagens/jukebox.ico" type="image/x-icon"/>
+	<link rel="icon" href="../resources/imagens/jukebox.ico" type="image/x-icon"/>
+</h:head>
+
+<h:body>
+	<div class="ui-grid ui-grid-responsive">
+		<div class="ui-grid-row  container">
+			<div class="ui-grid-col-4"></div>
+			<div class="ui-grid-col-4 formContainer">
+				<p:growl id="growl" life="5000" />
+
+				<h:form prependId="false">
+					<h2 class="formRow">Criar uma nova conta</h2>
+					<div class="formRow">
+						<p:inputText value="#{usersinterface.username}"
+							placeholder="username" required="true" requiredMessage="fill in an username" 
+							validator="usernameValidator" />
+					</div>
+					<div class="formRow">
+						<p:inputText value="#{usersinterface.email}"
+							placeholder="email" required="true" maxlength="40"
+							requiredMessage="fill in an email" validator="emailValidator" />
+					</div>
+					<div class="formRow">
+						<p:password value="#{usersinterface.password}"
+							placeholder="password" required="true" maxlength="40"
+							requiredMessage="fill in a password" validator="passwordValidator">
+							<f:attribute name="confirm" value="#{confirm}" />
+						</p:password>
+					</div>
+					<div class="formRow">
+						<p:password value="#{usersinterface.cpassword}"
+							placeholder="confirm password" required="true" maxlength="40" binding="#{confirm}"
+							requiredMessage="fill in password confirmation" />
+					</div>
+					<div class="formRow">
+						<p:commandButton value="sign up"
+							action="#{usersinterface.usersignup()}" update="growl" />
+						ou
+						<h:outputLink value="../index.xhtml">
+								<h:outputText value="login" />
+						</h:outputLink>
+					
+					</div>
+				</h:form>
+			</div>
+
+		</div>
+	</div>
+
+
+
+</h:body>
+</html>

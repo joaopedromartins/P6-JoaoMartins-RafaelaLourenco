@@ -1,0 +1,201 @@
+html, body {
+	overflow-x: hidden;
+	margin: 0;
+}
+
+#accountScreen {
+	display: none;
+}
+
+#playerScreen {
+	background: rgba(152, 115, 115, 0.8);
+	width: 30%;
+	height: 100%;
+	position: fixed;
+	left: 97%;
+	top: 0;
+	transition: left 1s;
+	color: white;
+	  border-left: solid 3px black;
+}
+
+
+#playerScreen:hover {
+	left: 70%;
+}
+
+#audioPlayer {
+	margin: 20px auto;
+	display: block;
+	width: 75%;
+}
+
+nav {
+	  background-color: rgba(152, 115, 115, 0.8);
+  height: 47px;
+  width: 97%;
+  margin-top: -15px;
+}
+
+nav li {
+	display: inline;
+	padding: 12px 12px;
+	line-height: 47px;
+}
+
+nav li.selected {
+	background: whitesmoke;
+	font-weight: bold;
+}
+
+nav li.username {
+	color: whitesmoke;
+	margin-left: 47%;
+}
+
+nav li a {
+	text-decoration: none;
+	color: whitesmoke;
+}
+
+nav li.selected a {
+	color: rgb(152, 115, 115);
+}
+
+.playlistScreen {
+	margin: 50px;
+}
+
+
+.accountLabel {
+	width: 100px;
+	display: inline-block;
+}
+
+.accountValue {
+	display: inline-block;
+	width: 240px;
+	text-align: center;
+}
+
+.accountSection {
+	border: 1px solid black;
+	background: whitesmoke;
+	display: inline-block;
+	padding: 5px 20px;
+	margin-bottom: 40px;
+}
+
+.accountDetailsMain {
+	margin: 16px 10px;
+}
+
+.accountDetailsForm {
+	display: none;
+}
+
+.accountUpdateFields {
+	margin: 0 0 15px 15px;
+}
+
+#userMusicList {
+	margin-top: 10px;
+}
+
+.userMusicCell {
+	display: inline-block;
+}
+
+.userMusicCellLarge {
+	width: 245px;
+}
+
+.userMusicCellSmall {
+	width: 90px;	
+}
+
+.userMusicCellLink {
+	width: 40px;	
+}
+
+.userMusicHeader {
+	  padding: 10px 10px 3px 10px;
+  		font-weight: bold;
+  	border-bottom: 1px solid grey;
+}
+
+.userMusicRow {
+	  padding: 10px;
+}
+
+.filterUnit {
+	padding: 7px;
+	background: rgba(140, 237, 140, 0.5);
+	margin-right: 20px;
+	border-radius: 4px;
+	border: 1px solid rgb(86, 210, 86);
+}
+
+#filterList {
+	margin-left: 50px;
+}
+
+.musicListFilter {
+	margin-top: 30px;
+}
+
+#newMusicBtn {
+	float: right;
+}
+
+#musicUploaderFormContainer {
+	display: none;	
+	margin-bottom: 40px;
+}
+
+.uploadFormInput {
+	margin: 5px 20px;
+}
+
+.hidden {
+	display: none;
+}
+
+#filterListAll {
+	margin: 10px 0;
+}
+
+#listaplaylist {
+	position:absolute;
+	top:330px;
+	left:100px;
+}
+
+#listamusicasplaylist {
+	position: absolute;
+	top: 330px;
+	left: 400px;
+}
+
+#musicaselecionada {
+	position: absolute;
+	top: 330px;
+	left: 750px;
+}
+
+#userMusicFilterAll {
+	position: absolute;
+	top: 330px;
+	left: 1000px;
+}
+
+.btnJ {
+	color: blue;
+  line-height: 25px;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+a {
+	color: blue;
+}
